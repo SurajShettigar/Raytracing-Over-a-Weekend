@@ -68,7 +68,7 @@ namespace raytracer
 
         Vector3 Vector3::normalize() const
         {
-            return *this / this->length();
+            return (*this / length());
         }
 
         double Vector3::dot(const Vector3 &v, const Vector3 &w)
@@ -88,6 +88,11 @@ namespace raytracer
             return v / v.length();
         }
 
+        Vector3 Vector3::lerp(const Vector3 &v, const Vector3 &w, double t)
+        {
+            return (1-t) * v + t * w;
+        }
+
         // Arithmetic Operations
         Vector3 operator+(const Vector3 &v, const Vector3 &w)
         {
@@ -104,17 +109,17 @@ namespace raytracer
             return Vector3(v[0] * w[0], v[1] * w[1], v[2] * w[2]);
         }
 
-        Vector3 operator*(const double a, const Vector3 &v)
+        Vector3 operator*(double a, const Vector3 &v)
         {
             return Vector3(v[0] * a, v[1] * a, v[2] * a);
         }
 
-        Vector3 operator*(const Vector3 &v, const double a)
+        Vector3 operator*(const Vector3 &v, double a)
         {
-            return v * a;
+            return a * v;
         }
 
-        Vector3 operator/(const Vector3 &v, const double a)
+        Vector3 operator/(const Vector3 &v, double a)
         {
             return (1 / a) * v;
         }

@@ -44,14 +44,15 @@ namespace raytracer
             static double dot(const Vector3 &v, const Vector3 &w);
             static Vector3 cross(const Vector3 &v, const Vector3 &w);
             static Vector3 normalize(const Vector3 &v);
+            static Vector3 lerp(const Vector3 &v, const Vector3 &w, double t);
 
             // Arithmetic operations
             friend Vector3 operator+(const Vector3 &v, const Vector3 &w);
             friend Vector3 operator-(const Vector3 &v, const Vector3 &w);
             friend Vector3 operator*(const Vector3 &v, const Vector3 &w);
-            friend Vector3 operator*(const Vector3 &v, const double a);
-            friend Vector3 operator*(const double a, const Vector3 &v);
-            friend Vector3 operator/(const Vector3 &v, const double a);
+            friend Vector3 operator*(const Vector3 &v, double a);
+            friend Vector3 operator*(double a, const Vector3 &v);
+            friend Vector3 operator/(const Vector3 &v, double a);
 
             // Other operations
             friend std::ostream &operator<<(std::ostream &out, const Vector3 &v);

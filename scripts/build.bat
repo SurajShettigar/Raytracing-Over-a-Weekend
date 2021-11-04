@@ -10,6 +10,9 @@ set objDir=.\obj
 if not exist %objDir% (
     mkdir %objDir%
     mkdir %objDir%\math
+    mkdir %objDir%\utils
+    mkdir %objDir%\tests
+    mkdir %objDir%\geo
     @REM mkdir %objDir%\game
 )
  
