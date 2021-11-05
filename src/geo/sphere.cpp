@@ -30,14 +30,36 @@ using namespace raytracer;
 *   2. One solution (Zero) - Ray intersects on sphere surface.
 *   3. No solution (Negative value) - Ray does not instersect.
 */
-bool Sphere::isHit(const Ray &ray) const
+bool Sphere::isHit(const Ray &ray, double tMin, double tMax, HitInfo &hitInfo) const
 {
     Vector3 aMinusC = ray.origin - origin;
-    double a = Vector3::dot(ray.direction, ray.direction);
-    double b = 2 * Vector3::dot(ray.direction, aMinusC);
-    double c = Vector3::dot(aMinusC, aMinusC) - radius * radius;
 
-    double discriminant = b * b - 4 * a * c;
+    // a term is dot product of ray direction with itself, which is nothing
+    // but length squared.
+    double a = ray.direction.lengthSquared();
 
-    return discriminant >= 0;
+    // b=2*h, where h = b•(A-C). We can simplify the quadratic equation
+    // x = (-b±sqrt(b^2-4ac))/2a as follows:
+    // x = (-h±sqrt(h^2-ac))/a
+    double h = Vector3::dot(ray.direction, aMinusC);
+    double c = aMinusC.lengthSquared() - radius * radius;
+
+    double discriminant = h * h - a * c;
+
+    if (discriminant < 0)
+        return false;
+
+    double t = (-h - sqrt(discriminant)) / a;
+    if (t < tMin || tMax < t)
+    {
+        t = (-h + sqrt(discriminant)) / a;
+        if (t < tMin || tMax < t)
+            return false;
+    }
+    hitInfo.distInRay = t;
+    hitInfo.point = ray.getPointAtDistance(hitInfo.distInRay);
+    hitInfo.normal = ((hitInfo.point - origin) / radius).normalize();
+    hitInfo.setFaceNormal(ray.direction.normalize(), hitInfo.normal);
+
+    return true;
 }

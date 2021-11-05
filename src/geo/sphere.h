@@ -5,7 +5,7 @@
 
 namespace raytracer
 {
-    class Sphere : Geometry
+    class Sphere : public Geometry
     {
     private:
         float m_radius = 1.0;
@@ -17,7 +17,7 @@ namespace raytracer
         Sphere(float radius, Point origin)
             : m_radius{radius}, m_origin{origin} {}
 
-        bool isHit(const Ray &ray) const override;
+        bool isHit(const Ray& ray, double tMin, double tMax, HitInfo& hitInfo) const override;
     };
 }
 
