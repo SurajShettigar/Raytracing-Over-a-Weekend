@@ -15,8 +15,12 @@ namespace raytracer
         Vector3 m_direction;
 
     public:
+        Ray()
+        : m_origin {Vector3::zero}, m_direction {Vector3::forward} {}
         Ray(const Point &origin, const Vector3 &direction)
             : m_origin{origin}, m_direction{direction} {}
+
+        Ray& operator=(const Ray& ray);
 
         Point &origin = m_origin;
         Vector3 &direction = m_direction;

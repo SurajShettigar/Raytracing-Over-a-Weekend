@@ -14,8 +14,8 @@ namespace raytracer
         float& radius = m_radius;
         Point& origin = m_origin;
 
-        Sphere(float radius, Point origin)
-            : m_radius{radius}, m_origin{origin} {}
+        Sphere(float radius, Point origin, shared_ptr<Material> material)
+            : Geometry(material), m_radius{radius}, m_origin{origin} {}
 
         bool isHit(const Ray& ray, double tMin, double tMax, HitInfo& hitInfo) const override;
     };

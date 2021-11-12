@@ -35,6 +35,7 @@
         "tuple": "cpp",
         "utility": "cpp",
         "unordered_map": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "optional": "cpp"
     }
 }

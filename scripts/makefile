@@ -18,12 +18,15 @@ OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 # 	-L$(EXT_DIR)\glew-2.1.0\lib\Release\x64
  
 all: $(PROJECT)
- 
+
+$(PROJECT): $(OBJ_FILES)
+
 $(PROJECT): $(OBJ_FILES)
 	g++ -o $(BUILD_DIR)/$@ $^
 # $(PROJECT): $(OBJ_FILES)
 # 	g++ -o $(BUILD_DIR)/$@ $^ $(LIB) $(LIBRAIRIES)
- 
+
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	g++ -std=c++17 -g -Wall -Wextra -pedantic -c -o $@ $<
 # $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp

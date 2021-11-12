@@ -1,7 +1,5 @@
 #include "vector3.h"
 
-#include <cmath>
-
 namespace raytracer
 {
     namespace math
@@ -90,7 +88,12 @@ namespace raytracer
 
         Vector3 Vector3::lerp(const Vector3 &v, const Vector3 &w, double t)
         {
-            return (1-t) * v + t * w;
+            return (1 - t) * v + t * w;
+        }
+        
+        Vector3 Vector3::reflect(const Vector3& v, const Vector3 & normal)
+        {
+            return v - 2 * dot(v, normal) * normal;
         }
 
         // Arithmetic Operations
@@ -125,6 +128,37 @@ namespace raytracer
         }
 
         // Other operations
+        Vector3 Vector3::random()
+        {
+            return Vector3(raytracer::math::random(),
+                           raytracer::math::random(),
+                           raytracer::math::random());
+        }
+
+        Vector3 Vector3::random(double min, double max)
+        {
+            return Vector3(raytracer::math::random(min, max),
+                           raytracer::math::random(min, max),
+                           raytracer::math::random(min, max));
+        }
+
+        Vector3 Vector3::randomSpherical()
+        {
+            double theta = 2 * PI * raytracer::math::random();
+            double phi = acos(1 - 2 * raytracer::math::random());
+
+            return Vector3(sin(phi) * cos(theta), sin(phi) * sin(theta), cos(phi)).normalize();
+        }
+
+        Vector3 Vector3::randomHemiSpherical(const Vector3 &normal)
+        {
+            Vector3 rand = Vector3::randomSpherical();
+            if (Vector3::dot(rand, normal) > 0.0)
+                return rand;
+            else
+                return -rand;
+        }
+
         std::ostream &operator<<(std::ostream &out, const Vector3 &v)
         {
             return out << '{' << v[0] << ", " << v[1] << ", " << v[2] << '}';
@@ -133,7 +167,7 @@ namespace raytracer
         // Comparison operations
         bool operator==(const Vector3 &v, const Vector3 &w)
         {
-            return std::abs(v.length() - w.length()) <= std::numeric_limits<double>::epsilon();
+            return std::abs(v.length() - w.length()) <= std::numeric_limits<float>::epsilon();
         }
 
         const Vector3 Vector3::zero{0.0, 0.0, 0.0};

@@ -32,7 +32,7 @@ using namespace raytracer;
 */
 bool Sphere::isHit(const Ray &ray, double tMin, double tMax, HitInfo &hitInfo) const
 {
-    Vector3 aMinusC = ray.origin - origin;
+    Vector3 aMinusC = ray.origin - m_origin;
 
     // a term is dot product of ray direction with itself, which is nothing
     // but length squared.
@@ -41,8 +41,8 @@ bool Sphere::isHit(const Ray &ray, double tMin, double tMax, HitInfo &hitInfo) c
     // b=2*h, where h = b•(A-C). We can simplify the quadratic equation
     // x = (-b±sqrt(b^2-4ac))/2a as follows:
     // x = (-h±sqrt(h^2-ac))/a
-    double h = Vector3::dot(ray.direction, aMinusC);
-    double c = aMinusC.lengthSquared() - radius * radius;
+    double h = Vector3::dot(aMinusC, ray.direction);
+    double c = aMinusC.lengthSquared() - m_radius * m_radius;
 
     double discriminant = h * h - a * c;
 
@@ -58,8 +58,10 @@ bool Sphere::isHit(const Ray &ray, double tMin, double tMax, HitInfo &hitInfo) c
     }
     hitInfo.distInRay = t;
     hitInfo.point = ray.getPointAtDistance(hitInfo.distInRay);
-    hitInfo.normal = ((hitInfo.point - origin) / radius).normalize();
-    hitInfo.setFaceNormal(ray.direction.normalize(), hitInfo.normal);
+    Vector3 outNorm = (hitInfo.point - m_origin) / m_radius;
+    hitInfo.setFaceNormal(ray.direction, outNorm);
+
+    hitInfo.material = m_material;
 
     return true;
 }

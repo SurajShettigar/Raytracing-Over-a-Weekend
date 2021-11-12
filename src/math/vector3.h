@@ -1,7 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include <iostream>
+#include "math.h"
 
 namespace raytracer
 {
@@ -45,6 +45,7 @@ namespace raytracer
             static Vector3 cross(const Vector3 &v, const Vector3 &w);
             static Vector3 normalize(const Vector3 &v);
             static Vector3 lerp(const Vector3 &v, const Vector3 &w, double t);
+            static Vector3 reflect(const Vector3& v, const Vector3 & normal);
 
             // Arithmetic operations
             friend Vector3 operator+(const Vector3 &v, const Vector3 &w);
@@ -55,6 +56,10 @@ namespace raytracer
             friend Vector3 operator/(const Vector3 &v, double a);
 
             // Other operations
+            static Vector3 random();
+            static Vector3 random(double min, double max);
+            static Vector3 randomSpherical();
+            static Vector3 randomHemiSpherical(const Vector3& normal);
             friend std::ostream &operator<<(std::ostream &out, const Vector3 &v);
 
             // Comparison operations

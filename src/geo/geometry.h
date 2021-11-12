@@ -1,34 +1,28 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
-#include "../utils/ray.h"
-#include "../math/vector3.h"
+#include <memory>
 
-#include <cmath>
+#include "hitinfo.h"
+#include "../material/material.h"
+
+using std::shared_ptr;
+using std::make_shared;
 
 namespace raytracer
 {
-    struct HitInfo
-    {
-        Point point = Point::zero;
-        Vector3 normal = Point::zero;
-        double distInRay = -1.0;
-        bool isFrontFace = true;
-
-        inline void setFaceNormal(const Vector3& rayDir, const Vector3& outwardNormal)
-        {
-            isFrontFace = Vector3::dot(rayDir, outwardNormal) < 0.0;
-            normal = isFrontFace ? outwardNormal : -outwardNormal;
-        }
-    };
-    
-
     class Geometry
     {
-    private:
+    protected:
+        shared_ptr<Material> m_material;
     public:
+        const shared_ptr<Material>& material = m_material;
+        
         Geometry() = default;
-        virtual bool isHit(const Ray& ray, double tMin, double tMax, HitInfo& hitInfo) const {}
+        Geometry(shared_ptr<Material> material)
+         : m_material(material) {}
+
+        virtual bool isHit(const Ray &ray, double tMin, double tMax, HitInfo &hitInfo) const = 0;
     };
 }
 

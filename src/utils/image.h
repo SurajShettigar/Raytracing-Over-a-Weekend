@@ -10,12 +10,14 @@ namespace raytracer
         int m_width = 1280;
         int m_height = 1.125;
         int m_samplesPerPixel = 16;
+        int m_maxBounces = 6;
 
     public:
         const float &aspectRatio = m_aspectRatio;
         const int &width = m_width;
         const int &height = m_height;
         int& samplesPerPixel = m_samplesPerPixel;
+        int& maxBounces = m_maxBounces;
 
         Image(int width, int height)
             : m_aspectRatio{static_cast<float>(width) / static_cast<float>(height)}, m_width{width}, m_height{height} {}

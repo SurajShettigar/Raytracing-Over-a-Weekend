@@ -13,6 +13,7 @@ if not exist %objDir% (
     mkdir %objDir%\utils
     mkdir %objDir%\tests
     mkdir %objDir%\geo
+    mkdir %objDir%\material
     @REM mkdir %objDir%\game
 )
  

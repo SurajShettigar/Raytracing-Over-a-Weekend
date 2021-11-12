@@ -20,7 +20,7 @@ bool GeometryList::isHit(const Ray &ray, double tMin, double tMax, HitInfo &hitI
 
     for(const shared_ptr<Geometry> &g: geoList)
     {
-        if(g->isHit(ray, tMin, tMax, tempHitInfo))
+        if(g->isHit(ray, tMin, closestHitDist, tempHitInfo))
         {
             hitInfo = tempHitInfo;
             closestHitDist = hitInfo.distInRay;
