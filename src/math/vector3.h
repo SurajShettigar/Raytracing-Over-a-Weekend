@@ -58,6 +58,7 @@ namespace raytracer
             // Other operations
             static Vector3 random();
             static Vector3 random(double min, double max);
+            static Vector3 randomCircular();
             static Vector3 randomSpherical();
             static Vector3 randomHemiSpherical(const Vector3& normal);
             friend std::ostream &operator<<(std::ostream &out, const Vector3 &v);

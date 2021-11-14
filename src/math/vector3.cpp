@@ -90,8 +90,8 @@ namespace raytracer
         {
             return (1 - t) * v + t * w;
         }
-        
-        Vector3 Vector3::reflect(const Vector3& v, const Vector3 & normal)
+
+        Vector3 Vector3::reflect(const Vector3 &v, const Vector3 &normal)
         {
             return v - 2 * dot(v, normal) * normal;
         }
@@ -142,6 +142,27 @@ namespace raytracer
                            raytracer::math::random(min, max));
         }
 
+        /**
+         * @brief Random point in a 2D circle of unit radius
+         * 
+         * @return Vector3 
+         */
+        Vector3 Vector3::randomCircular()
+        {
+            while (true)
+            {
+                Vector3 randomPt = Vector3(math::random(-1.0, 1.0), math::random(-1.0, 1.0), 0.0);
+                if (randomPt.lengthSquared() >= 1.0)
+                    continue;
+                return randomPt;
+            }
+        }
+
+        /**
+         * @brief Uniformly distributed random point in a sphere of unit radius
+         * 
+         * @return Vector3 
+         */
         Vector3 Vector3::randomSpherical()
         {
             double theta = 2 * PI * raytracer::math::random();
