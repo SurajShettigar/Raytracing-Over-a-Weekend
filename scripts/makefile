@@ -4,7 +4,7 @@ BUILD_DIR := ../build
 OBJ_DIR := ../build/obj
 # EXT_DIR := ../external
  
-SRC_FILES := $(wildcard $(SRC_DIR)/**/*.cpp) $(wildcard $(SRC_DIR)/*.cpp)
+SRC_FILES := $(wildcard $(SRC_DIR)/**/**/*.cpp) $(wildcard $(SRC_DIR)/**/*.cpp) $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
  
 # LIBRAIRIES := -lSDL2main -lSDL2 -lSDL2_image -lglew32 -lzlib1 -lopengl32

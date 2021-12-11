@@ -1,24 +1,5 @@
 #include "constants.h"
 
-#include "./utils/camera.h"
-#include "./utils/image.h"
-#include "./geo/sphere.h"
-#include "./geo/geometry_list.h"
-#include "./material/lambert.h"
-#include "./material/metallic.h"
-#include "./material/dielectric.h"
-
-#include <chrono>
-
-using std::chrono::duration;
-using std::chrono::steady_clock;
-
-using namespace raytracer;
-using math::clamp;
-using math::Color;
-using math::random;
-using math::Vector3;
-
 Color getRayPixelColor(const Ray &ray, const Geometry &geo, int currBounce)
 {
     raytracer::HitInfo hit;
@@ -94,7 +75,7 @@ Camera getCamera()
 Image getTargetImage()
 {
     Image image(640, 360);
-    image.samplesPerPixel = 142;
+    image.samplesPerPixel = 32;
     image.maxBounces = 8;
 
     return image;

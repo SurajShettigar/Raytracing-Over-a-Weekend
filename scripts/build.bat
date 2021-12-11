@@ -10,11 +10,10 @@ set objDir=.\obj
 if not exist %objDir% (
     mkdir %objDir%
     mkdir %objDir%\math
-    mkdir %objDir%\utils
-    mkdir %objDir%\tests
-    mkdir %objDir%\geo
-    mkdir %objDir%\material
-    @REM mkdir %objDir%\game
+    mkdir %objDir%\raytracer
+    mkdir %objDir%\raytracer\geo
+    mkdir %objDir%\raytracer\material
+    mkdir %objDir%\raytracer\utils
 )
  
 :: Needed folders
